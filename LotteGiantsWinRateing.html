@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotte Giants Win Rate</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_orange.css">
+</head>
+
+<body>
+    <h1>Lotte Giants 승률 계산기</h1>
+    <label for="date-picker">날짜 선택:</label>
+    <input type="text" id="date-picker" placeholder="여러 날짜 선택">
+    <button onclick="calculateWinRate()">승률 계산</button>
+    <p id="result"></p>
+    <h2>경기 상세 정보:</h2>
+    <ul id="game-details"></ul>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ko.js"></script>
+    <script src="js/flatpickr.js"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/ko.js"></script>
+
+    <script>
+        // 경기 데이터
+        const gameData = [
+            { date: "2024-03-23", opponent: "SSG 랜더스", result: "loss", lotteScore: 3, opponentScore: 5 },
+            { date: "2024-03-24", opponent: "SSG 랜더스", result: "loss", lotteScore: 6, opponentScore: 7 },
+            { date: "2024-03-26", opponent: "KIA 타이거즈", result: "loss", lotteScore: 1, opponentScore: 2 },
+            { date: "2024-03-27", opponent: "KIA 타이거즈", result: "loss", lotteScore: 2, opponentScore: 8 },
+            { date: "2024-03-29", opponent: "NC 다이노스", result: "win", lotteScore: 3, opponentScore: 1 },
+            { date: "2024-03-30", opponent: "NC 다이노스", result: "loss", lotteScore: 0, opponentScore: 8 },
+            { date: "2024-03-31", opponent: "NC 다이노스", result: "loss", lotteScore: 7, opponentScore: 8 },
+            { date: "2024-04-02", opponent: "한화 이글스", result: "win", lotteScore: 1, opponentScore: 0 },
+            { date: "2024-04-04", opponent: "한화 이글스", result: "loss", lotteScore: 5, opponentScore: 6 },
+            { date: "2024-04-05", opponent: "두산 베어스", result: "loss", lotteScore: 4, opponentScore: 3 },
+            { date: "2024-04-06", opponent: "두산 베어스", result: "win", lotteScore: 8, opponentScore: 1 },
+            { date: "2024-04-07", opponent: "두산 베어스", result: "win", lotteScore: 7, opponentScore: 6 },
+            { date: "2024-04-09", opponent: "삼성 라이온즈", result: "loss", lotteScore: 1, opponentScore: 8 },
+            { date: "2024-04-10", opponent: "삼성 라이온즈", result: "loss", lotteScore: 7, opponentScore: 10 },
+            { date: "2024-04-11", opponent: "삼성 라이온즈", result: "loss", lotteScore: 0, opponentScore: 4 },
+            { date: "2024-04-12", opponent: "키움 히어로즈", result: "loss", lotteScore: 4, opponentScore: 9 },
+            { date: "2024-04-13", opponent: "키움 히어로즈", result: "loss", lotteScore: 1, opponentScore: 8 },
+            { date: "2024-04-14", opponent: "키움 히어로즈", result: "loss", lotteScore: 5, opponentScore: 7 },
+            { date: "2024-04-16", opponent: "LG 트윈스", result: "loss", lotteScore: 2, opponentScore: 7 },
+            { date: "2024-04-17", opponent: "LG 트윈스", result: "loss", lotteScore: 5, opponentScore: 6 },
+            { date: "2024-04-18", opponent: "LG 트윈스", result: "win", lotteScore: 9, opponentScore: 2 },
+            { date: "2024-04-19", opponent: "KT Wiz", result: "win", lotteScore: 4, opponentScore: 3 },
+            { date: "2024-04-20", opponent: "KT Wiz", result: "draw", lotteScore: 9, opponentScore: 9 },
+            { date: "2024-04-21", opponent: "KT Wiz", result: "win", lotteScore: 7, opponentScore: 5 },
+            { date: "2024-04-24", opponent: "SSG 랜더스", result: "loss", lotteScore: 7, opponentScore: 12 },
+            { date: "2024-04-25", opponent: "SSG 랜더스", result: "win", lotteScore: 6, opponentScore: 3 },
+            { date: "2024-04-26", opponent: "NC 다이노스", result: "loss", lotteScore: 0, opponentScore: 4 },
+            { date: "2024-04-27", opponent: "NC 다이노스", result: "loss", lotteScore: 0, opponentScore: 2 },
+            { date: "2024-04-28", opponent: "NC 다이노스", result: "loss", lotteScore: 3, opponentScore: 5 },
+            { date: "2024-04-30", opponent: "키움 히어로즈", result: "loss", lotteScore: 9, opponentScore: 7 },
+            { date: "2024-05-01", opponent: "키움 히어로즈", result: "loss", lotteScore: 3, opponentScore: 6 },
+            { date: "2024-05-02", opponent: "키움 히어로즈", result: "win", lotteScore: 6, opponentScore: 5 },
+            { date: "2024-05-03", opponent: "삼성 라이온즈", result: "win", lotteScore: 8, opponentScore: 7 },
+            { date: "2024-05-04", opponent: "삼성 라이온즈", result: "win", lotteScore: 9, opponentScore: 2 },
+            { date: "2024-05-08", opponent: "한화 이글스", result: "win", lotteScore: 6, opponentScore: 1 },
+            { date: "2024-05-09", opponent: "한화 이글스", result: "win", lotteScore: 18, opponentScore: 5 },
+            { date: "2024-05-10", opponent: "LG 트윈스", result: "loss", lotteScore: 1, opponentScore: 9 },
+            { date: "2024-05-11", opponent: "LG 트윈스", result: "loss", lotteScore: 1, opponentScore: 2 },
+            { date: "2024-05-12", opponent: "LG 트윈스", result: "loss", lotteScore: 4, opponentScore: 6 },
+            { date: "2024-05-14", opponent: "KT Wiz", result: "loss", lotteScore: 4, opponentScore: 7 },
+            { date: "2024-05-16", opponent: "KT Wiz", result: "win", lotteScore: 2, opponentScore: 0 },
+            { date: "2024-05-17", opponent: "두산 베어스", result: "win", lotteScore: 5, opponentScore: 1 },
+            { date: "2024-05-18", opponent: "두산 베어스", result: "loss", lotteScore: 3, opponentScore: 8 },
+            { date: "2024-05-19", opponent: "두산 베어스", result: "draw", lotteScore: 3, opponentScore: 3 },
+            { date: "2024-05-21", opponent: "KIA 타이거즈", result: "win", lotteScore: 6, opponentScore: 1 },
+            { date: "2024-05-22", opponent: "KIA 타이거즈", result: "win", lotteScore: 4, opponentScore: 2 },
+            { date: "2024-05-23", opponent: "KIA 타이거즈", result: "win", lotteScore: 10, opponentScore: 6 },
+            { date: "2024-05-24", opponent: "삼성 라이온즈", result: "loss", lotteScore: 5, opponentScore: 11 },
+            { date: "2024-05-25", opponent: "삼성 라이온즈", result: "win", lotteScore: 7, opponentScore: 6 },
+            { date: "2024-05-26", opponent: "삼성 라이온즈", result: "win", lotteScore: 9, opponentScore: 1 },
+            { date: "2024-05-28", opponent: "한화 이글스", result: "loss", lotteScore: 3, opponentScore: 12 },
+            { date: "2024-05-29", opponent: "한화 이글스", result: "loss", lotteScore: 0, opponentScore: 3 },
+            { date: "2024-05-30", opponent: "한화 이글스", result: "loss", lotteScore: 0, opponentScore: 15 },
+            { date: "2024-05-31", opponent: "NC 다이노스", result: "win", lotteScore: 13, opponentScore: 5 },
+            { date: "2024-06-01", opponent: "NC 다이노스", result: "loss", lotteScore: 2, opponentScore: 4 },
+            { date: "2024-06-02", opponent: "NC 다이노스", result: "win", lotteScore: 13, opponentScore: 4 },
+            { date: "2024-06-04", opponent: "KIA 타이거즈", result: "win", lotteScore: 6, opponentScore: 0 },
+            { date: "2024-06-05", opponent: "KIA 타이거즈", result: "win", lotteScore: 9, opponentScore: 3 },
+            { date: "2024-06-06", opponent: "KIA 타이거즈", result: "loss", lotteScore: 4, opponentScore: 5 },
+            { date: "2024-06-07", opponent: "SSG 랜더스", result: "win", lotteScore: 11, opponentScore: 7 },
+            { date: "2024-06-08", opponent: "SSG 랜더스", result: "loss", lotteScore: 1, opponentScore: 5 },
+            { date: "2024-06-09", opponent: "SSG 랜더스", result: "win", lotteScore: 5, opponentScore: 3 },
+            { date: "2024-06-11", opponent: "키움 히어로즈", result: "loss", lotteScore: 2, opponentScore: 5 },
+            { date: "2024-06-12", opponent: "키움 히어로즈", result: "win", lotteScore: 9, opponentScore: 2 },
+            { date: "2024-06-13", opponent: "키움 히어로즈", result: "win", lotteScore: 18, opponentScore: 10 },
+            { date: "2024-06-14", opponent: "LG 트윈스", result: "loss", lotteScore: 3, opponentScore: 5 },
+            { date: "2024-06-15", opponent: "LG 트윈스", result: "win", lotteScore: 9, opponentScore: 8 },
+            { date: "2024-06-16", opponent: "LG 트윈스", result: "loss", lotteScore: 8, opponentScore: 9 },
+            { date: "2024-06-18", opponent: "KT Wiz", result: "loss", lotteScore: 4, opponentScore: 6 },
+            { date: "2024-06-19", opponent: "KT Wiz", result: "win", lotteScore: 13, opponentScore: 5 },
+            { date: "2024-06-20", opponent: "KT Wiz", result: "loss", lotteScore: 6, opponentScore: 7 },
+            { date: "2024-06-21", opponent: "키움 히어로즈", result: "loss", lotteScore: 2, opponentScore: 5 },
+            { date: "2024-06-22", opponent: "키움 히어로즈", result: "win", lotteScore: 6, opponentScore: 1 },
+            { date: "2024-06-23", opponent: "키움 히어로즈", result: "win", lotteScore: 10, opponentScore: 2 },
+            { date: "2024-06-25", opponent: "KIA 타이거즈", result: "draw", lotteScore: 15, opponentScore: 15 },
+            { date: "2024-06-26", opponent: "KIA 타이거즈", result: "win", lotteScore: 6, opponentScore: 4 },
+            { date: "2024-06-27", opponent: "KIA 타이거즈", result: "win", lotteScore: 11, opponentScore: 2 },
+            { date: "2024-06-28", opponent: "한화 이글스", result: "win", lotteScore: 6, opponentScore: 4 },
+            { date: "2024-07-03", opponent: "두산 베어스", result: "loss", lotteScore: 8, opponentScore: 13 },
+            { date: "2024-07-04", opponent: "두산 베어스", result: "loss", lotteScore: 3, opponentScore: 6 },
+            { date: "2024-07-09", opponent: "SSG 랜더스", result: "loss", lotteScore: 4, opponentScore: 7 },
+            { date: "2024-07-10", opponent: "SSG 랜더스", result: "win", lotteScore: 6, opponentScore: 1 },
+            { date: "2024-07-11", opponent: "SSG 랜더스", result: "loss", lotteScore: 4, opponentScore: 5 },
+            { date: "2024-07-12", opponent: "KT Wiz", result: "loss", lotteScore: 4, opponentScore: 5 },
+            { date: "2024-07-13", opponent: "KT Wiz", result: "loss", lotteScore: 3, opponentScore: 6 },
+            { date: "2024-07-16", opponent: "두산 베어스", result: "win", lotteScore: 4, opponentScore: 0 },
+            { date: "2024-07-17", opponent: "두산 베어스", result: "win", lotteScore: 6, opponentScore: 2 },
+            { date: "2024-07-18", opponent: "두산 베어스", result: "loss", lotteScore: 2, opponentScore: 3 },
+            { date: "2024-07-19", opponent: "삼성 라이온즈", result: "win", lotteScore: 10, opponentScore: 6 },
+            { date: "2024-07-20", opponent: "삼성 라이온즈", result: "loss", lotteScore: 4, opponentScore: 21 },
+            { date: "2024-07-21", opponent: "삼성 라이온즈", result: "loss", lotteScore: 5, opponentScore: 6 },
+            { date: "2024-07-23", opponent: "LG 트윈스", result: "loss", lotteScore: 1, opponentScore: 2 },
+            { date: "2024-07-25", opponent: "LG 트윈스", result: "loss", lotteScore: 6, opponentScore: 9 },
+            { date: "2024-07-26", opponent: "NC 다이노스", result: "loss", lotteScore: 2, opponentScore: 9 },
+            { date: "2024-07-27", opponent: "NC 다이노스", result: "win", lotteScore: 9, opponentScore: 2 },
+            { date: "2024-07-28", opponent: "NC 다이노스", result: "win", lotteScore: 10, opponentScore: 6 },
+            { date: "2024-07-30", opponent: "SSG 랜더스", result: "loss", lotteScore: 5, opponentScore: 11 },
+            { date: "2024-07-31", opponent: "SSG 랜더스", result: "loss", lotteScore: 11, opponentScore: 12 },
+            { date: "2024-08-01", opponent: "SSG 랜더스", result: "win", lotteScore: 4, opponentScore: 2 },
+            { date: "2024-08-03", opponent: "LG 트윈스", result: "win", lotteScore: 8, opponentScore: 3 },
+            { date: "2024-08-06", opponent: "NC 다이노스", result: "win", lotteScore: 6, opponentScore: 5 },
+            { date: "2024-08-07", opponent: "NC 다이노스", result: "win", lotteScore: 14, opponentScore: 7 },
+            { date: "2024-08-09", opponent: "KT Wiz", result: "loss", lotteScore: 6, opponentScore: 10 },
+            { date: "2024-08-10", opponent: "KT Wiz", result: "win", lotteScore: 2, opponentScore: 0 },
+            { date: "2024-08-11", opponent: "KT Wiz", result: "win", lotteScore: 9, opponentScore: 7 },
+            { date: "2024-08-14", opponent: "두산 베어스", result: "win", lotteScore: 12, opponentScore: 2 },
+            { date: "2024-08-15", opponent: "두산 베어스", result: "loss", lotteScore: 3, opponentScore: 4 },
+            { date: "2024-08-16", opponent: "키움 히어로즈", result: "win", lotteScore: 4, opponentScore: 0 },
+            { date: "2024-08-17", opponent: "키움 히어로즈", result: "loss", lotteScore: 7, opponentScore: 8 },
+            { date: "2024-08-18", opponent: "키움 히어로즈", result: "win", lotteScore: 5, opponentScore: 4 },
+            { date: "2024-08-21", opponent: "KIA 타이거즈", result: "loss", lotteScore: 5, opponentScore: 6 },
+            { date: "2024-08-22", opponent: "KIA 타이거즈", result: "loss", lotteScore: 4, opponentScore: 6 },
+            { date: "2024-08-23", opponent: "삼성 라이온즈", result: "loss", lotteScore: 3, opponentScore: 5 },
+            { date: "2024-08-24", opponent: "삼성 라이온즈", result: "win", lotteScore: 11, opponentScore: 3 },
+            { date: "2024-08-25", opponent: "삼성 라이온즈", result: "loss", lotteScore: 5, opponentScore: 10 },
+            { date: "2024-08-27", opponent: "한화 이글스", result: "win", lotteScore: 3, opponentScore: 1 },
+            { date: "2024-08-28", opponent: "한화 이글스", result: "loss", lotteScore: 0, opponentScore: 7 },
+            { date: "2024-08-29", opponent: "한화 이글스", result: "win", lotteScore: 14, opponentScore: 11 },
+            { date: "2024-08-30", opponent: "키움 히어로즈", result: "win", lotteScore: 8, opponentScore: 2 },
+            { date: "2024-08-31", opponent: "두산 베어스", result: "win", lotteScore: 7, opponentScore: 4 },
+            { date: "2024-09-01", opponent: "두산 베어스", result: "win", lotteScore: 4, opponentScore: 3 },
+            { date: "2024-09-03", opponent: "삼성 라이온즈", result: "loss", lotteScore: 1, opponentScore: 5 },
+            { date: "2024-09-04", opponent: "KT Wiz", result: "win", lotteScore: 7, opponentScore: 5 },
+            { date: "2024-09-05", opponent: "KT Wiz", result: "loss", lotteScore: 2, opponentScore: 12 },
+            { date: "2024-09-06", opponent: "삼성 라이온즈", result: "loss", lotteScore: 2, opponentScore: 7 },
+            { date: "2024-09-07", opponent: "SSG 랜더스", result: "draw", lotteScore: 1, opponentScore: 1 },
+            { date: "2024-09-08", opponent: "SSG 랜더스", result: "loss", lotteScore: 6, opponentScore: 11 },
+            { date: "2024-09-10", opponent: "LG 트윈스", result: "win", lotteScore: 2, opponentScore: 1 },
+            { date: "2024-09-11", opponent: "SSG 랜더스", result: "win", lotteScore: 10, opponentScore: 2 },
+            { date: "2024-09-12", opponent: "KIA 타이거즈", result: "loss", lotteScore: 0, opponentScore: 10 },
+            { date: "2024-09-13", opponent: "한화 이글스", result: "loss", lotteScore: 4, opponentScore: 8 },
+            { date: "2024-09-14", opponent: "한화 이글스", result: "win", lotteScore: 12, opponentScore: 9 },
+            { date: "2024-09-15", opponent: "한화 이글스", result: "win", lotteScore: 16, opponentScore: 9 },
+            { date: "2024-09-17", opponent: "LG 트윈스", result: "win", lotteScore: 7, opponentScore: 3 },
+            { date: "2024-09-18", opponent: "LG 트윈스", result: "loss", lotteScore: 3, opponentScore: 5 },
+            { date: "2024-09-19", opponent: "LG 트윈스", result: "loss", lotteScore: 4, opponentScore: 7 },
+            { date: "2024-09-22", opponent: "한화 이글스", result: "loss", lotteScore: 4, opponentScore: 8 },
+            { date: "2024-09-23", opponent: "한화 이글스", result: "win", lotteScore: 3, opponentScore: 2 },
+            { date: "2024-09-24", opponent: "KT Wiz", result: "loss", lotteScore: 1, opponentScore: 5 },
+            { date: "2024-09-25", opponent: "KIA 타이거즈", result: "win", lotteScore: 5, opponentScore: 2 },
+            { date: "2024-09-26", opponent: "두산 베어스", result: "loss", lotteScore: 3, opponentScore: 4 },
+            { date: "2024-09-27", opponent: "NC 다이노스", result: "win", lotteScore: 13, opponentScore: 6 },
+            { date: "2024-09-28", opponent: "KIA 타이거즈", result: "loss", lotteScore: 8, opponentScore: 12 },
+            { date: "2024-10-01", opponent: "NC 다이노스", result: "win", lotteScore: 5, opponentScore: 1 }
+
+        ];
+
+        // Flatpickr 설정
+        flatpickr("#date-picker", {
+            mode: "multiple", // 다중 날짜 선택 모드
+            dateFormat: "Y-m-d",
+            minDate: "2024-03-23", // 최소 날짜
+            maxDate: "2024-10-01", // 최대 날짜
+            locale: "ko",
+            disable: [
+                "2024-03-25", // 특정 날짜를 문자열로 추가
+                "2024-03-28", // 또 다른 비활성화 날짜
+                "2024-04-01",
+                "2024-04-03",
+                "2024-04-08",
+                "2024-04-15",
+                "2024-04-22",
+                "2024-04-23",
+                "2024-04-29",
+                "2024-05-05",
+                "2024-05-06",
+                "2024-05-07",
+                "2024-05-13",
+                "2024-05-15",
+                "2024-05-20",
+                "2024-05-24",
+                "2024-05-27",
+                "2024-06-03",
+                "2024-06-08",
+                "2024-06-10",
+                "2024-06-17",
+                "2024-06-24",
+                "2024-06-29",
+                "2024-06-30",
+                "2024-07-01",
+                "2024-07-02",
+                "2024-07-05",
+                "2024-07-06",
+                "2024-07-07",
+                "2024-07-08",
+                "2024-07-14",
+                "2024-07-15",
+                "2024-07-22",
+                "2024-07-24",
+                "2024-07-29",
+                "2024-08-02",
+                "2024-08-04",
+                "2024-08-05",
+                "2024-08-08",
+                "2024-08-12",
+                "2024-08-13",
+                "2024-08-19",
+                "2024-08-20",
+                "2024-08-26",
+                "2024-09-02",
+                "2024-09-09",
+                "2024-09-16",
+                "2024-09-20",
+                "2024-09-21",
+                "2024-09-29",
+                "2024-09-30",
+
+            ]
+
+        });
+
+        // 승률 및 세부 정보 계산 함수
+        function calculateWinRate() {
+            const selectedDates = document.getElementById("date-picker").value.split(", ");
+
+            if (selectedDates.length === 0 || selectedDates[0] === "") {
+                document.getElementById("result").innerText = "날짜를 하나 이상 선택하세요.";
+                document.getElementById("game-details").innerHTML = "";
+                return;
+            }
+
+            let totalGames = 0;
+            let wins = 0;
+            let draws = 0;
+
+            let gameDetailsHTML = "";
+
+            // 선택된 날짜 순회
+            selectedDates.forEach(date => {
+                gameData.forEach(game => {
+                    if (game.date === date) {
+                        totalGames++;
+                        if (game.result === "win") wins++;
+                        if (game.result === "draw") draws++;
+
+                        // 경기 상세 정보 추가
+                        gameDetailsHTML += `
+                            <li>
+                                <strong>${date}</strong> vs <strong>${game.opponent}</strong>: 
+                                롯데 ${game.lotteScore} - ${game.opponentScore} (${game.result === "win" ? "승리" : game.result === "loss" ? "패배" : "무승부"})
+                            </li>
+                        `;
+                    }
+                });
+            });
+
+            if (totalGames === 0) {
+                document.getElementById("result").innerText = "선택한 날짜에 경기 기록이 없습니다.";
+                document.getElementById("game-details").innerHTML = "";
+                return;
+            }
+
+            // 승률 계산 (무승부 제외)
+            const winRate = totalGames > 0 ? ((wins / totalGames) * 100).toFixed(2) : 0;
+
+            // 결과 표시
+            document.getElementById("result").innerText = `
+                승률: ${winRate}% (${wins} 승리, ${draws} 무승부, ${totalGames - wins - draws} 패배 / ${totalGames} 경기 중)
+            `;
+            document.getElementById("game-details").innerHTML = gameDetailsHTML;
+        }
+    </script>
+</body>
+
+</html>

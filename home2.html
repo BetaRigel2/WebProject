@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>롯데 자이언츠</title>
+    <style>
+        @font-face {
+            font-family: 'GiantsBold';
+            src: url('font_ttf/Giants-Bold.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'GiantsInline';
+            src: url('font_ttf/Giants-Inline.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'GiantsRegular';
+            src: url('font_ttf/Giants-Regular.ttf')format('truetype');
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .topdiv1{
+            position: fixed; /* fixed로 고정 */
+            top: 0; /* 화면 상단에 고정 */
+            left: 0;
+            width: 100%;
+            height:60px;
+            background-color: rgb(4, 30, 66);
+            color: white;
+            text-align: center;
+            z-index: 2; /* menu1보다 z-index가 커야 겹치지 않음 */
+            font-family: GiantsInline, sans-serif;
+            margin:0;
+        }
+        .top1 { 
+            margin-top:10px
+           }
+
+        .backgrond1 {
+            position: absolute;
+            left: 0;
+            top: 60px; /* top1 아래로 오도록 설정 */
+            width: 100%;
+            height: 700px;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .backgrond1 img {
+            display: block;
+            text-align: left;
+            position: relative;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: opacity 0.6s ease-in-out;
+            max-width: 1200px;
+        }
+
+        .menu1 {
+            position: fixed;
+            top: 60px; /* top1 바로 아래로 설정 */
+            z-index: 3;
+            background-color: rgba(4, 30, 66, 0.85);
+            border-top: 4px solid #c8102e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 70px;
+            width: 100%;
+        }
+
+        .menu1:hover {
+            background-color: rgba(4, 30, 66, 1);
+        }
+
+        .menu1 a {
+            font-family: GiantsRegular, sans-serif;
+            text-decoration: none;
+            color: whitesmoke;
+            transition: color 0.3s;
+            opacity: 100%;
+            font-size: large;
+        }
+
+        nav li {
+            list-style: none;
+        }
+
+        nav a:hover {
+            color: #a10b23;
+        }
+
+        main {
+            padding: 20px;
+            text-align: center;
+            margin-top: 750px; /* 메뉴와 background가 겹치지 않도록 여백을 설정 */
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .lotte_logo1 {
+            opacity: 100%;
+            margin-left: -50%;
+            margin-top: 5%;
+        }
+        .mainsech11{
+            font-family: GiantsBold;
+            font-size:xx-large;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="topdiv1">
+            <h1 class="top1">롯데자이언츠 직관 승률 트래커</h1>
+        </div>
+        <div class="backgrond1"><img id="backgroundImage" src="images/240925-기아전-49-승리의 하이파이브KCH25146.jpg"></div>
+        <nav class="menu12">
+            <div class="menu1">
+                <h1><a href="home2.html"><img class="lotte_logo1" alt="롯데_로고_하얀색" src="images/logo_header.png"></a></h1>
+                <li>
+                    <a href="LotteGiantsWinRateing.html"><span>직관 승률계산</span></a>
+                </li>
+
+                <li>
+                    <a href="#"><span>주요 선수</span></a>
+                </li>
+                <li>
+                    <a href="#"><span>시즌 성적</span></a>
+                </li>
+                <li>
+                    <a href="#"><span>다가오는 일정</span></a>
+                </li>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <div class="maindiv1">
+                <img src="images/Lotte_logo.png" style="width:200px ">
+                <h1 class="mainsech11">롯데자이언츠 직관 승률 트래커에 오신 것을 환영합니다!</h1>
+            </div>
+        </section>
+    </main>
+    <footer>
+        &copy; 2024 롯데 자이언츠. All Rights Reserved.
+    </footer>
+
+    <script>
+        // 이미지 배열 정의
+        const images = [
+            'images/240925-기아전-49-승리의 하이파이브KCH25146.jpg',
+            'images/240528-한화전-44-최이준KCH36454.jpg',
+            'images/240905-KT전-57-이민석 역투KCH29236.jpg',
+            'images/240623-키움전-75-승리의 하이파이브KCH30618.jpg',
+            'images/240503-삼성전-63-승리의 하이파이브KCH34999.jpg',
+            'images/240723-LG전-58-rnKCH29360.jpg'
+        ];
+
+        let currentImageIndex = 0;
+
+        // 이미지 변경 함수
+        function changeBackgroundImage() {
+            const backgroundImageElement = document.getElementById('backgroundImage');
+            backgroundImageElement.style.opacity = 0; // 현재 이미지 페이드 아웃
+
+            // 새로운 이미지 로드 후 페이드 인
+            setTimeout(() => {
+                backgroundImageElement.src = images[currentImageIndex];
+                backgroundImageElement.style.opacity = 1; // 새로운 이미지 페이드 인
+            }, 600); // 1초 후 이미지 변경
+            currentImageIndex = (currentImageIndex + 1) % images.length; // 배열 순환
+        }
+
+        // 5초마다 이미지 변경
+        setInterval(changeBackgroundImage, 10000);
+    </script>
+
+</body>
+
+</html>
