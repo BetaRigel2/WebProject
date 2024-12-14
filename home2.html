@@ -20,85 +20,112 @@
             font-family: 'GiantsRegular';
             src: url('font_ttf/Giants-Regular.ttf')format('truetype');
         }
+
         @font-face {
-            font-family:'NanumGothic';
+            font-family: 'NanumGothic';
             src: url('font_ttf/NanumGothic.ttf')format('truetype');
         }
-        @font-face{
-            font-family:'NanumGothicBold';
+
+        @font-face {
+            font-family: 'NanumGothicBold';
             src: url('font_ttf/NanumGothicBold.ttf')format('truetype');
         }
-        @font-face{
-            font-family:'NanumSquareB';
+
+        @font-face {
+            font-family: 'NanumSquareB';
             src: url('font_ttf/NanumSquareB.ttf')format('truetype');
         }
-        @font-face{
-            font-family:'NanumSquareEB';
+
+        @font-face {
+            font-family: 'NanumSquareEB';
             src: url('font_ttf/NanumSquareEB.ttf')format('truetype');
         }
-        @font-face{
-            font-family:'NanumSquareL';
+
+        @font-face {
+            font-family: 'NanumSquareL';
             src: url('font_ttf/NanumSquareL.ttf')format('truetype');
         }
-        @font-face{
-            font-family:'NanumSquareRoundB';
+
+        @font-face {
+            font-family: 'NanumSquareRoundB';
             src: url('font_ttf/NanumSquareRoundB.ttf')format('truetype');
         }
-        @font-face{
-            font-family:'NanumSquareRoundL';
+
+        @font-face {
+            font-family: 'NanumSquareRoundL';
             src: url('font_ttf/NanumSquareRoundL.ttf')format('truetype');
-        }        @font-face{
-            font-family:'NanumSquareRoundR';
+        }
+
+        @font-face {
+            font-family: 'NanumSquareRoundR';
             src: url('font_ttf/NanumSquareRoundR.ttf')format('truetype');
         }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: rgba(108, 172, 228, 0.1);
             color: #333;
         }
-        .topdiv1{
-            position: fixed; /* fixed로 고정 */
-            top: 0; /* 화면 상단에 고정 */
+
+        .topdiv1 {
+            position: fixed;
+            /* fixed로 고정 */
+            top: 0;
+            /* 화면 상단에 고정 */
             left: 0;
             width: 100%;
-            height:60px;
+            height: 60px;
             background-color: rgb(4, 30, 66);
             color: white;
             text-align: center;
-            z-index: 2; /* menu1보다 z-index가 커야 겹치지 않음 */
+            z-index: 100;
+            /* menu1보다 z-index가 커야 겹치지 않음 */
             font-family: GiantsInline, sans-serif;
-            margin:0;
+            margin: 0;
         }
-        .top1 { 
-            margin-top:10px
-           }
+
+        .top1 {
+            margin-top: 10px
+        }
 
         .backgrond1 {
             position: absolute;
             left: 0;
-            top: 60px; /* top1 아래로 오도록 설정 */
+            top: 60px;
+            /* top1 아래로 오도록 설정 */
             width: 100%;
             height: 700px;
-            object-fit: cover;
             z-index: 0;
         }
 
         .backgrond1 img {
-            display: block;
+            display: flex;
             text-align: left;
             position: relative;
-            height: 100%;
+            height: 700px;
             width: 100%;
-            object-fit:cover;
-            transition: opacity 0.6s ease-in-out;
+            object-fit: cover;
+            transition: opacity 0.9s ease-in-out;
+        }
+
+        .blackbanner1 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(14, 21, 27, 0.9);
+            z-index: 3;
+            width: 100%;
+            height: 60px;
+            border: 0px;
         }
 
         .menu1 {
             position: fixed;
-            top: 60px; /* top1 바로 아래로 설정 */
-            z-index: 3;
+            top: 60px;
+            /* top1 바로 아래로 설정 */
+            z-index: 10;
             background-color: rgba(4, 30, 66, 0.85);
             border-top: 4px solid #c8102e;
             display: flex;
@@ -130,9 +157,8 @@
         }
 
         main {
-            padding: 20px;
-            text-align: center;
-            margin-top: 750px; /* 메뉴와 background가 겹치지 않도록 여백을 설정 */
+            margin-top: 750px;
+            /* 메뉴와 background가 겹치지 않도록 여백을 설정 */
         }
 
         footer {
@@ -143,6 +169,7 @@
             position: fixed;
             bottom: 0;
             width: 100%;
+            z-index: 100;
         }
 
         .lotte_logo1 {
@@ -150,34 +177,336 @@
             margin-left: -50%;
             margin-top: 5%;
         }
-        .mainsech11{
+
+        .mainsech11 {
             font-family: GiantsBold;
-            font-size:xx-large;
+            font-size: xx-large;
+            color: whitesmoke;
+        }
+
+        .banner1 {
+            position: relative;
+            bottom: 0;
+            left: 0;
+            background-color: rgb(4, 30, 66);
+            z-index: 3;
+            width: 100%;
+            height: 70px;
+            border-bottom: solid 3px #c8102e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner2 {
+            display: flex;
+        }
+
+        .banner2left {
+            position: relative;
+            bottom: 0;
+            left: 0;
+            background-color: rgb(4, 30, 66);
+            z-index: 3;
+            width: 50%;
+            height: 100px;
+            border-right: solid 0.5px gray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .banner2left a {
+            text-decoration: none !important;
+        }
+
+        .banner2left span {
+            display: flex;
+            color: whitesmoke;
+            font-family: GiantsRegular, sans-serif;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: color 0.3s;
+        }
+
+        .banner2left span:hover {
+            color: #a10b23;
+        }
+
+        .banner2right {
+            position: relative;
+            bottom: 0;
+            background-color: rgb(4, 30, 66);
+            z-index: 3;
+            width: 50%;
+            height: 100px;
+            border-left: solid 0.5px gray;
+            vertical-align: baseline;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .banner2right a {
+            text-decoration: none !important;
+        }
+
+        .banner2right span {
+            display: flex;
+            color: whitesmoke;
+            font-family: GiantsRegular, sans-serif;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .banner2right span:hover {
+            color: #a10b23;
+            text-decoration: none;
+        }
+
+        .maindivcontainleft1 {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .maindivcontainleft1img {
+            display: flex;
+            width: 60%;
+            height: 380px;
+            border-radius: 20px;
+            box-shadow: #333 5px 10px 10px;
+            z-index: 1;
+            margin-top: 50px;
+            font-size: 50px;
+            min-width: 570px;
+            max-width: 570px;
+        }
+
+        .maincontainlefttext1 {
+            position: absolute;
+            display: flex;
+            left: 7%;
+            bottom: 60%;
+            z-index: 5;
+            color: white;
+            font-family: GiantsInline, sans-serif;
+            font-size: 3em;
+        }
+
+        .maincontainlefttext2 {
+            position: absolute;
+            display: flex;
+            left: 13%;
+            bottom: 51%;
+            z-index: 5;
+            color: white;
+            font-family: GiantsInline, sans-serif;
+            font-size: 1.5em;
+        }
+
+        .maindivcontainright1 {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .maindivcontainright1img {
+            display: flex;
+            width: 60%;
+            height: 380px;
+            border-radius: 20px;
+            box-shadow: #333 5px 10px 10px;
+            z-index: 1;
+            margin-top: 80px;
+            font-size: 50px;
+            min-width: 570px;
+            max-width: 570px;
+
+        }
+
+        .maincontainrighttext1 {
+            position: absolute;
+            display: flex;
+            right: 14%;
+            bottom: 60%;
+            z-index: 5;
+            color: white;
+            font-family: GiantsInline, sans-serif;
+            font-size: 3em;
+        }
+
+        .maincontainrighttext2 {
+            position: absolute;
+            display: flex;
+            right: 15%;
+            bottom: 51%;
+            z-index: 5;
+            color: white;
+            font-family: GiantsInline, sans-serif;
+            font-size: 1.5em;
+        }
+
+        .maindivcontainleft2 {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .maindivcontainleft2img {
+            display: flex;
+            width: 60%;
+            height: 380px;
+            border-radius: 20px;
+            box-shadow: #333 5px 10px 10px;
+            z-index: 1;
+            margin-top: 80px;
+            font-size: 50px;
+            min-width: 570px;
+            max-width: 570px;
+
+        }
+
+        .maincontainlefttext3 {
+            position: absolute;
+            display: flex;
+            left: 7%;
+            bottom: 60%;
+            z-index: 5;
+            color: white;
+            font-family: GiantsInline, sans-serif;
+            font-size: 3em;
+        }
+
+        .maincontainlefttext4 {
+            position: absolute;
+            display: flex;
+            left: 13%;
+            bottom: 51%;
+            z-index: 5;
+            color: white;
+            font-family: GiantsInline, sans-serif;
+            font-size: 1.5em;
+        }
+
+        .maindivcontainright2 {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .maindivcontainright2img {
+            display: flex;
+            width: 60%;
+            height: 380px;
+            border-radius: 20px;
+            box-shadow: #333 5px 10px 10px;
+            z-index: 1;
+            margin-top: 80px;
+            font-size: 50px;
+            min-width: 570px;
+            max-width: 570px;
+
+        }
+
+        .maincontainrighttext3 {
+            position: absolute;
+            display: flex;
+            right: 6%;
+            bottom: 60%;
+            z-index: 5;
+            color: white;
+            font-family: GiantsInline, sans-serif;
+            font-size: 3em;
+        }
+
+        .maincontainrighttext4 {
+            position: absolute;
+            display: flex;
+            right: 15%;
+            bottom: 51%;
+            z-index: 5;
+            color: white;
+            font-family: GiantsInline, sans-serif;
+            font-size: 1.5em;
+        }
+        .scroll-to-top {
+            position: fixed;
+            bottom: 50px;
+            right: 20px;
+            background-color: rgba(4, 30, 66, 0.8);
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: GiantsInline, sans-serif;
+            font-size: 14px;
+            z-index: 1000;
+            transition: opacity 0.3s ease-in-out, background-color 0.3s;
+        }
+
+        .scroll-to-top:hover {
+            background-color: rgba(200, 16, 46, 0.8);
+        }
+
+        .scroll-to-top:active {
+            background-color: rgba(4, 30, 66, 1);
         }
     </style>
+    <sytle>
+
+    </sytle>
 </head>
 
 <body>
+    <a href="#" id="scrollToTop" class="scroll-to-top" style="display: none;">TOP</a>
+
     <header>
         <div class="topdiv1">
             <h1 class="top1">롯데자이언츠 직관 승률 트래커</h1>
         </div>
-        <div class="backgrond1"><img id="backgroundImage" src="images/240925-기아전-49-승리의 하이파이브KCH25146.jpg"></div>
+        <div class="backgrond1"><img id="backgroundImage" src="images/240925-기아전-49-승리의 하이파이브KCH25146.jpg">
+            <div class="blackbanner1">
+
+            </div>
+        </div>
         <nav class="menu12">
             <div class="menu1">
                 <h1><a href="home2.html"><img class="lotte_logo1" alt="롯데_로고_하얀색" src="images/logo_header.png"></a></h1>
                 <li>
-                    <a href="LotteGiantsWinRateing.html"><span>직관 승률계산</span></a>
+                    <a href="LotteGiantsWinRateing.html"><span>직관 승률 트래커</span></a>
                 </li>
 
                 <li>
-                    <a href="#"><span>주요 선수</span></a>
+                    <a href="Introduce.html"><span>소개</span></a>
                 </li>
                 <li>
-                    <a href="#"><span>시즌 성적</span></a>
+                    <a href="SeasonPerform.html"><span>시즌 성적</span></a>
                 </li>
                 <li>
-                    <a href="#"><span>다가오는 일정</span></a>
+                    <a href="MainPlayer.html"><span>주요 선수</span></a>
                 </li>
             </div>
         </nav>
@@ -186,10 +515,62 @@
     <main>
         <section>
             <div class="maindiv1">
-                <img src="images/Lotte_logo.png" style="width:200px ">
-                <h1 class="mainsech11">롯데자이언츠 직관 승률 트래커에 오신 것을 환영합니다!</h1>
+                <div class="banner1">
+                    <h1 class="mainsech11">롯데자이언츠 직관 승률 트래커에 오신 것을 환영합니다!</h1>
+                </div>
+                <div class="banner2">
+                    <div class="banner2left">
+                        <a href="https://www.giantsclub.com/html/"><img src="images/logo.png"
+                                style="width:90px; height:auto;"><span>롯데 자이언츠 홈페이지</span></a>
+                    </div>
+                    <div class="banner2right">
+                        <a href="https://www.youtube.com/@giantstv"><img src="images/youtube_logo.png"
+                                style="width:90px; height:auto;"><span>자이언츠 TV
+                            </span></a>
+                    </div>
+                </div>
             </div>
         </section>
+        <section>
+            <div class="maindivcontain1">
+                <div class="maindivcontainleft1">
+                    <a class="maindivcontainleft1" href="LotteGiantsWinRateing.html">
+                        <img class="maindivcontainleft1img" src="images/240330-NC전-53-사직팬나잇DJI_0621.jpg">
+                        <span class="maincontainlefttext1">직관 승률 트래커</span>
+                        <span class="maincontainlefttext2">바로가기 ></span>
+                        </img>
+                    </a>
+                </div>
+                <div class="maindivcontainright1">
+                    <a class="maindivcontainright1" href="LotteGiantsWinRateing.html">
+                        <img class="maindivcontainright1img" src="images/240621-키움전-35-구승민KCH26156.jpg">
+                        <span class="maincontainrighttext1"> 소개 </span>
+                        <span class="maincontainrighttext2">
+                            < 바로가기</span>
+                                </img>
+                    </a>
+                </div>
+                <div class="maindivcontainleft2">
+                    <a class="maindivcontainleft2" href="SeasonPerform.html">
+                        <img class="maindivcontainleft2img" src="images/240503-삼성전-63-승리의 하이파이브KCH34999.jpg">
+                        <span class="maincontainlefttext3">시즌 성적</span>
+                        <span class="maincontainlefttext4">바로가기 ></span>
+                        </img>
+                    </a>
+                </div>
+                <div class="maindivcontainright2">
+                    <a class="maindivcontainright2" href="MainPlayer.html">
+                        <img class="maindivcontainright2img" src="images/240908-SSG전-68-나승엽 적시타점KCH26201.jpg">
+                        <span class="maincontainrighttext3">주요 선수</span>
+                        <span class="maincontainrighttext4">
+                            < 바로가기</span>
+                                </img>
+                    </a>
+                </div>
+            </div>
+            </div>
+        </section>
+        <br><br><br><br><br><br><br>
     </main>
     <footer>
         &copy; 2024 롯데 자이언츠. All Rights Reserved.
@@ -217,14 +598,35 @@
             setTimeout(() => {
                 backgroundImageElement.src = images[currentImageIndex];
                 backgroundImageElement.style.opacity = 1; // 새로운 이미지 페이드 인
-            }, 600); // 1초 후 이미지 변경
+            }, 800); // 1초 후 이미지 변경
             currentImageIndex = (currentImageIndex + 1) % images.length; // 배열 순환
         }
 
-        // 5초마다 이미지 변경
         setInterval(changeBackgroundImage, 10000);
     </script>
-
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const scrollToTopBtn = document.getElementById("scrollToTop");
+    
+                // 스크롤 감지 이벤트
+                window.addEventListener("scroll", function () {
+                    if (window.scrollY > 300) {
+                        scrollToTopBtn.style.display = "block";
+                    } else {
+                        scrollToTopBtn.style.display = "none";
+                    }
+                });
+    
+                // 클릭 이벤트 (맨 위로 부드럽게 이동)
+                scrollToTopBtn.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+                });
+            });
+        </script>
 </body>
 
 </html>

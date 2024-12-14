@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotte Giants Win Rate</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_orange.css">
+
+    <style>
+        /* 기존의 CSS 그대로 유지 */
+
+        /* Custom Font Faces */
+        @font-face {
+            font-family: 'GiantsBold';
+            src: url('font_ttf/Giants-Bold.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'GiantsInline';
+            src: url('font_ttf/Giants-Inline.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'GiantsRegular';
+            src: url('font_ttf/Giants-Regular.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'NanumGothic';
+            src: url('font_ttf/NanumGothic.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'NanumGothicBold';
+            src: url('font_ttf/NanumGothicBold.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'NanumSquareB';
+            src: url('font_ttf/NanumSquareB.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'NanumSquareEB';
+            src: url('font_ttf/NanumSquareEB.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'NanumSquareL';
+            src: url('font_ttf/NanumSquareL.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'NanumSquareRoundB';
+            src: url('font_ttf/NanumSquareRoundB.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'NanumSquareRoundL';
+            src: url('font_ttf/NanumSquareRoundL.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'NanumSquareRoundR';
+            src: url('font_ttf/NanumSquareRoundR.ttf')format('truetype');
+        }
+
+        /* 기본 스타일 유지 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgba(108, 172, 228, 0.1);
+            color: #333;
+        }
+
+        .topdiv1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: rgb(4, 30, 66);
+            color: white;
+            text-align: center;
+            z-index: 100;
+            font-family: GiantsInline, sans-serif;
+            margin: 0;
+        }
+
+        .top1 {
+            margin-top: 10px;
+        }
+
+        .backgrond1 {
+            position: absolute;
+            left: 0;
+            top: 60px;
+            width: 100%;
+            height: 700px;
+            z-index: 0;
+        }
+
+        .backgrond1 img {
+            display: flex;
+            text-align: left;
+            position: relative;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .blackbanner1 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(14, 21, 27, 0.9);
+            z-index: 3;
+            width: 100%;
+            height: 60px;
+            border: 0px;
+        }
+
+        .menu1 {
+            position: fixed;
+            z-index: 100;
+            top: 60px;
+            background-color: rgba(4, 30, 66, 0.85);
+            border-top: 4px solid #c8102e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 70px;
+            width: 100%;
+        }
+
+        .menu1:hover {
+            background-color: rgba(4, 30, 66, 1);
+        }
+
+        .menu1 a {
+            font-family: GiantsRegular, sans-serif;
+            text-decoration: none;
+            color: whitesmoke;
+            transition: color 0.3s;
+            opacity: 100%;
+            font-size: large;
+        }
+
+        nav li {
+            list-style: none;
+        }
+
+        nav a:hover {
+            color: #a10b23;
+        }
+
+        main {
+            margin-top: 900px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .lotte_logo1 {
+            opacity: 100%;
+            margin-left: -50%;
+            margin-top: 5%;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 50px;
+            right: 20px;
+            background-color: rgba(4, 30, 66, 0.8);
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: GiantsInline, sans-serif;
+            font-size: 14px;
+            z-index: 1000;
+            transition: opacity 0.3s ease-in-out, background-color 0.3s;
+        }
+
+        .scroll-to-top:hover {
+            background-color: rgba(200, 16, 46, 0.8);
+        }
+
+        .scroll-to-top:active {
+            background-color: rgba(4, 30, 66, 1);
+        }
+
+        .player-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+            margin-bottom: 800px;
+            gap: 150px;
+            /* 선수 간격을 늘림 */
+        }
+
+        .player-card {
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .player-card img {
+            height: 100%;
+            border-radius: 10px;
+            box-shadow: 5px 5px 5px 3px;
+            transition: transform 0.3s ease;
+        }
+
+        .player-card img:hover {
+            transform: scale(1.1);
+        }
+
+        .player-info {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            display: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 400px;
+        }
+
+        .player-info h2 {
+            margin-top: 0;
+        }
+
+        .player-card p {
+            font-family: GiantsRegular;
+            font-size: 20px;
+            text-align: center;
+            padding-left: 30%
+        }
+
+        .player-info img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            padding-left:40px
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#" id="scrollToTop" class="scroll-to-top" style="display: none;">TOP</a>
+    <header>
+        <div class="topdiv1">
+            <h1 class="top1">롯데자이언츠 직관 승률 트래커</h1>
+        </div>
+        <div class="backgrond1"><img id="backgroundImage" src="images/bg_main_visual_20240208_01.jpg">
+            <div class="blackbanner1"></div>
+            <nav class="menu12">
+                <div class="menu1">
+                    <h1><a href="home2.html"><img class="lotte_logo1" alt="롯데_로고_하얀색" src="images/logo_header.png"></a>
+                    </h1>
+                    <li><a href="LotteGiantsWinRateing.html"><span>직관 승률 트래커</span></a></li>
+                    <li><a href="Introduce.html"><span>소개</span></a></li>
+                    <li><a href="SeasonPerform.html"><span>시즌 성적</span></a></li>
+                    <li><a href="MainPlayer.html"><span>주요 선수</span></a></li>
+                </div>
+            </nav>
+    </header>
+
+    <main>
+        <section>
+            <div class="player-container">
+                <div class="player-card" onclick="togglePlayerInfo('player1')">
+                    <img src="images/yoon.jpg" alt="Player 1">
+                    <p>윤동희</p>
+                </div>
+                <div class="player-card" onclick="togglePlayerInfo('player2')">
+                    <img src="images/victer.jpg" alt="Player 2">
+                    <p>레이예스</p>
+                </div>
+                <div class="player-card" onclick="togglePlayerInfo('player3')">
+                    <img src="images/na1.jpg" alt="Player 3">
+                    <p>나승엽</p>
+                </div>
+            </div>
+            <!-- 선수 정보 표시 영역 -->
+            <div class="player-info" id="player-info" data-current-player="">
+                <img id="info-image" src="" alt="Player Image">
+                <h2 id="info-title">선수 이름</h2>
+                <p id="info-details">선수 상세 정보</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2024 롯데 자이언츠. All Rights Reserved.
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const scrollToTopBtn = document.getElementById("scrollToTop");
+
+            // 스크롤 감지 이벤트
+            window.addEventListener("scroll", function () {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.style.display = "block";
+                } else {
+                    scrollToTopBtn.style.display = "none";
+                }
+            });
+
+            // 클릭 이벤트 (맨 위로 부드럽게 이동)
+            scrollToTopBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            });
+        });
+    </script>
+    <script>
+        // 선수 데이터 정의
+        const players = {
+            player1: {
+                name: "윤동희",
+                age: 21,
+                position: "외야수",
+                experience: "3년",
+                tota:"우투우타",
+                image: "images/yoon1.png"
+            },
+            player2: {
+                name: "레이예스",
+                age: 30,
+                position: "외야수",
+                experience: "13년",
+                tota: "우투양타",
+                image: "images/victor1.png"
+            },
+            player3: {
+                name: "나승엽",
+                age: 22,
+                position: "1루수",
+                experience: "4년",
+                tota: "우투좌타",
+                image: "images/na.png"
+            }
+        };
+
+        // 선수 정보를 토글하는 함수
+        function togglePlayerInfo(playerId) {
+            const playerInfoDiv = document.getElementById("player-info");
+            const infoImage = document.getElementById("info-image");
+            const infoTitle = document.getElementById("info-title");
+            const infoDetails = document.getElementById("info-details");
+
+            // 이미 표시된 정보가 클릭된 선수와 같은 경우 닫기
+            if (playerInfoDiv.style.display === "block" && playerInfoDiv.dataset.currentPlayer === playerId) {
+                playerInfoDiv.style.display = "none";
+                playerInfoDiv.dataset.currentPlayer = "";
+                return;
+            }
+
+            // 선수 정보 업데이트
+            const player = players[playerId];
+            if (player) {
+                infoImage.src = player.image;
+                infoTitle.textContent = player.name;
+                infoDetails.textContent = `나이: ${player.age}, 포지션: ${player.position}, 경력: ${player.experience}, 투타: ${player.tota}`;
+                playerInfoDiv.style.display = "block";
+                playerInfoDiv.dataset.currentPlayer = playerId;
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lotte Giants Win Rate</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_orange.css">
+
+    <style>
+        @font-face {
+            font-family: 'GiantsBold';
+            src: url('font_ttf/Giants-Bold.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'GiantsInline';
+            src: url('font_ttf/Giants-Inline.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'GiantsRegular';
+            src: url('font_ttf/Giants-Regular.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'NanumGothic';
+            src: url('font_ttf/NanumGothic.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'NanumGothicBold';
+            src: url('font_ttf/NanumGothicBold.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'NanumSquareB';
+            src: url('font_ttf/NanumSquareB.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'NanumSquareEB';
+            src: url('font_ttf/NanumSquareEB.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'NanumSquareL';
+            src: url('font_ttf/NanumSquareL.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'NanumSquareRoundB';
+            src: url('font_ttf/NanumSquareRoundB.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'NanumSquareRoundL';
+            src: url('font_ttf/NanumSquareRoundL.ttf')format('truetype');
+        }
+
+        @font-face {
+            font-family: 'NanumSquareRoundR';
+            src: url('font_ttf/NanumSquareRoundR.ttf')format('truetype');
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: rgba(108, 172, 228, 0.1);
+            color: #333;
+        }
+
+        .topdiv1 {
+            position: fixed;
+            /* fixed로 고정 */
+            top: 0;
+            /* 화면 상단에 고정 */
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: rgb(4, 30, 66);
+            color: white;
+            text-align: center;
+            z-index: 100;
+            /* menu1보다 z-index가 커야 겹치지 않음 */
+            font-family: GiantsInline, sans-serif;
+            margin: 0;
+        }
+
+        .top1 {
+            margin-top: 10px
+        }
+
+        .backgrond1 {
+            position: absolute;
+            left: 0;
+            top: 60px;
+            /* top1 아래로 오도록 설정 */
+            width: 100%;
+            height: 700px;
+            z-index: 0;
+        }
+
+        .backgrond1 img {
+            display: flex;
+            text-align: left;
+            position: relative;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+
+        }
+
+        .blackbanner1 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(14, 21, 27, 0.9);
+            z-index: 3;
+            width: 100%;
+            height: 60px;
+            border: 0px;
+        }
+
+        .menu1 {
+            position: fixed;
+            top: 60px;
+            /* top1 바로 아래로 설정 */
+            z-index: 10;
+            background-color: rgba(4, 30, 66, 0.85);
+            border-top: 4px solid #c8102e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 70px;
+            width: 100%;
+        }
+
+        .menu1:hover {
+            background-color: rgba(4, 30, 66, 1);
+        }
+
+        .menu1 a {
+            font-family: GiantsRegular, sans-serif;
+            text-decoration: none;
+            color: whitesmoke;
+            transition: color 0.3s;
+            opacity: 100%;
+            font-size: large;
+        }
+
+        nav li {
+            list-style: none;
+        }
+
+        nav a:hover {
+            color: #a10b23;
+        }
+
+        main {
+            margin-top: 750px;
+            /* 메뉴와 background가 겹치지 않도록 여백을 설정 */
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 100;
+        }
+
+        .lotte_logo1 {
+            opacity: 100%;
+            margin-left: -50%;
+            margin-top: 5%;
+        }
+
+        main {
+            margin-bottom: 200px;
+        }
+
+        .scroll-to-top {
+            position: fixed;
+            bottom: 50px;
+            right: 20px;
+            background-color: rgba(4, 30, 66, 0.8);
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-family: GiantsInline, sans-serif;
+            font-size: 14px;
+            z-index: 1000;
+            transition: opacity 0.3s ease-in-out, background-color 0.3s;
+        }
+
+        .scroll-to-top:hover {
+            background-color: rgba(200, 16, 46, 0.8);
+        }
+
+        .scroll-to-top:active {
+            background-color: rgba(4, 30, 66, 1);
+        }
+
+        .intro-section {
+            padding: 40px 20px;
+            background-color: white;
+            text-align: left;
+            font-family: NanumGothic, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            margin-bottom:50px;
+            /* 중앙 정렬 */
+            border-left: 6px solid rgba(4, 30, 66, 1);
+
+            /* 빨간색 강조선 */
+            padding-left: 20px;
+            /* 강조선과 텍스트 사이 간격 */
+            border-radius: 5px 30px 30px 5px;
+        }
+
+        .intro-section h2 {
+            font-family: GiantsInline, sans-serif;
+            color: #c8102e;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+        .intro-section p {
+            font-family: NanumSquareRoundR, sans-serif;
+            color: rgba(4, 30, 66, 1);
+            font-size: 17px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#" id="scrollToTop" class="scroll-to-top" style="display: none;">TOP</a>
+
+    <header>
+        <div class="topdiv1">
+            <h1 class="top1">롯데자이언츠 직관 승률 트래커</h1>
+        </div>
+        <div class="backgrond1"><img id="backgroundImage" src="images/bg_main_visual_20240208_02.jpg">
+            <div class="blackbanner1">
+            </div>
+            <nav class="menu12">
+                <div class="menu1">
+                    <h1><a href="home2.html"><img class="lotte_logo1" alt="롯데_로고_하얀색" src="images/logo_header.png"></a>
+                    </h1>
+                    <li>
+                        <a href="LotteGiantsWinRateing.html"><span>직관 승률 트래커</span></a>
+                    </li>
+
+                    <li>
+                        <a href="Introduce.html"><span>소개</span></a>
+                    </li>
+                    <li>
+                        <a href="SeasonPerform.html"><span>시즌 성적</span></a>
+                    </li>
+                    <li>
+                        <a href="MainPlayer.html"><span>주요 선수</span></a>
+                    </li>
+                </div>
+            </nav>
+    </header>
+
+    <br><br><br>
+    <main>
+        <section class="intro-section">
+            <h2>프로젝트 목적 및 목표</h2>
+            <p>KBO 리그가 천만 관중 시대를 맞이하며, 경기장을 직접 관람하는 팬들, 즉 직관을 가는 팬들이 증가하고 있습니다.
+                 <br>팬들 사이에서는 승률에 따라 승리의 요정 혹은 패배의 귀신 등으로 불리는 별칭 또한 생기고 있습니다.
+                  <br>하지만 자신의 승률을 전용 앱(롯데자이언츠의 경우)에서 기록하기 위해서는 발급받은 티켓의
+                   QR코드를 전용 앱에 따로 등록해주어야 하는 번거로움이 있습니다. 
+                  </p>
+            <p>본 프로젝트는 이러한 불편함을 해결하고자 자신의 직관 관람 날짜를 편리하게 달력을 통해 입력받아,
+                 해당 경기의 <br> 승/무/패 결과를 받아와서 자신의 직관 승률을 확인할 수 있는 웹사이트 개발을 목표로 합니다.</p>
+        </section>
+        <section class="intro-section">
+            <h2>타겟 사용자</h2>
+            <p>롯데자이언츠츠 구단의 팬, 경기 관람 빈도가 높은 팬 
+                  </p>
+            <p>자신이 관란함 경기를 데이터로 남기고, 그 결과를 통해 재미 요소를 즐기려는 사람들이나, 야구 경기에 대한 추억을
+                <br>기록하며, 관람한 날짜와 결과를 쉽게 조화하려는 사람들.
+            </p>
+        </section>
+        <section class="intro-section">
+            <h2>주요 기능 소개</h2>
+            <p>팬들이 직관한 날짜를 달력에 클릭하여 간편하게 입력할 수 있으며, 입력된 날짜를 기반으로 해당 경기의 승/무/패 <br>
+                결과를 자동으로 가져올 수 있습니다.
+                 또한 사용자가 관람한 경기 중 승리 경기의 비율을 계산하여 보여줍니다.
+            </p>
+            <p>
+                이로써 티켓 QR코드를 등록하는 번거로움을 없애고, 달력을 통해 빠르고 쉽게 기록이 가능하다는 장점이 있습니다.
+                <br>주변 지인이나 친구와 승률을 비교하며 추억을 되새겨 보는건 어떨까요? 
+            </p>
+
+
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2024 롯데 자이언츠. All Rights Reserved.
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const scrollToTopBtn = document.getElementById("scrollToTop");
+
+            // 스크롤 감지 이벤트
+            window.addEventListener("scroll", function () {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.style.display = "block";
+                } else {
+                    scrollToTopBtn.style.display = "none";
+                }
+            });
+
+            // 클릭 이벤트 (맨 위로 부드럽게 이동)
+            scrollToTopBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
